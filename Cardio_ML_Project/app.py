@@ -1,26 +1,3 @@
-# import streamlit as st
-
-# # 1. Setup Page Config (Must be first)
-# st.set_page_config(
-#     page_title="CardioHealth AI",
-#     page_icon="❤️",
-#     layout="wide"
-# )
-
-# # 2. Define Pages
-# home_page = st.Page("pages/home.py", title="Home", icon="🏠", default=True)
-# dashboard_page = st.Page("pages/dashboard.py", title="Analytics Dashboard", icon="📊")
-# prediction_page = st.Page("pages/prediction.py", title="Health Prediction", icon="🩺")
-
-# # 3. Create Navigation
-# pg = st.navigation({
-#     "Main": [home_page],
-#     "Analysis": [dashboard_page, prediction_page]
-# })
-
-# # 4. Run Navigation
-# pg.run()
-
 import streamlit as st
 import numpy as np
 import pandas as pd
