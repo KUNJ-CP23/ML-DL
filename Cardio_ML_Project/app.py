@@ -25,70 +25,129 @@ st.set_page_config(
 def local_css():
     st.markdown("""
     <style>
-        /* Global Typography */
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        /* Global Typography and Reset */
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Inter:wght@300;400;600&display=swap');
         
         html, body, [class*="css"] {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Outfit', sans-serif;
+            color: #2c3e50;
         }
         
-        /* Headers */
-        h1, h2, h3 {
-            font-weight: 700;
-        }
-        
+        /* Main Title Gradient */
         .main-title {
-            font-size: 3rem;
-            background: -webkit-linear-gradient(45deg, #e63946, #c0392b);
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-align: center;
             margin-bottom: 0.5rem;
+            letter-spacing: -1px;
+            text-shadow: 0 4px 10px rgba(255, 107, 107, 0.2);
         }
         
         .subtitle {
             text-align: center;
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            opacity: 0.8;
+            font-size: 1.3rem;
+            color: #57606f;
+            margin-bottom: 2.5rem;
+            font-weight: 400;
         }
 
-        /* Card container style - Adaptive */
+        /* Modern Card Container */
         .stCard {
-            border: 1px solid rgba(128, 128, 128, 0.2);
-            border-radius: 12px;
-            padding: 1.5rem;
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 2rem;
             margin-bottom: 1.5rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            border: 1px solid #f0f2f5;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .stCard:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+
+        /* Parameter Card Specifics */
+        .param-card {
+            background: transparent;
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            height: 100%;
+            transition: transform 0.3s ease;
+        }
+        
+        .param-card:hover {
+             transform: translateY(-5px);
+        }
+
+        .param-header {
+            color: #2c3e50;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .param-desc {
+            color: #636e72;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Section Headers */
+        .section-header {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid #f0f2f5;
+            padding-bottom: 0.5rem;
+        }
+
+        /* Custom Input Styling Override */
+        .stNumberInput, .stSelectbox, .stRadio {
+            background-color: transparent;
+        }
+        
+        div[data-baseweb="input"] {
+            background-color: #f8f9fa;
+            border: 1px solid #e1e4e8;
+            border-radius: 10px;
+        }
+
+        /* Button Styling - Gradient */
+        .stButton button {
+            background: linear-gradient(90deg, #FF6B6B 0%, #FF8E53 100%);
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+        }
+        
+        .stButton button:hover {
+            transform: scale(1.02);
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.4);
+            color: white;
         }
 
         /* Risk Badges */
-        .badge-safe { background-color: rgba(46, 204, 113, 0.2); color: #2ecc71; padding: 4px 12px; border-radius: 20px; font-weight: 600; }
-        .badge-danger { background-color: rgba(231, 76, 60, 0.2); color: #e74c3c; padding: 4px 12px; border-radius: 20px; font-weight: 600; }
-        .badge-warning { background-color: rgba(241, 196, 15, 0.2); color: #f1c40f; padding: 4px 12px; border-radius: 20px; font-weight: 600; }
+        .badge-safe { background-color: #e8f8f5; color: #1abc9c; padding: 6px 14px; border-radius: 20px; font-weight: 600; border: 1px solid #1abc9c; }
+        .badge-danger { background-color: #fdedec; color: #e74c3c; padding: 6px 14px; border-radius: 20px; font-weight: 600; border: 1px solid #e74c3c; }
+        .badge-warning { background-color: #fef9e7; color: #f1c40f; padding: 6px 14px; border-radius: 20px; font-weight: 600; border: 1px solid #f1c40f; }
 
-        /* Button Styling */
-        .stButton button {
-            border-radius: 8px;
-            padding: 0.5rem 1.5rem;
-            font-weight: 600;
-            border: none;
-            width: 100%;
-        }
-        
-        /* Metrics - clear colors to use default theme */
-        .metric-value {
-             font-size: 2rem;
-             font-weight: 700;
-        }
-        .metric-label {
-             font-size: 0.9rem;
-             text-transform: uppercase;
-             opacity: 0.7;
-        }
-        
-        /* Hide streamlit elements */
+        /* Hide Streamlit Branding */
         #MainMenu {visibility: hidden;}
         footer {visibility: hidden;}
+        
     </style>
 
     """, unsafe_allow_html=True)
@@ -159,7 +218,7 @@ def generate_report(data, risk_score, risk_label):
 def download_link(content, filename):
     """Create a download link for string content."""
     b64 = base64.b64encode(content.encode()).decode()
-    return f'<a href="data:file/txt;base64,{b64}" download="{filename}" style="text-decoration:none; padding: 10px 20px; background-color: #4CAF50; color: white; border-radius: 5px; font-weight: bold;">📥 Download Full Medical Report</a>'
+    return f'<a href="data:file/txt;base64,{b64}" download="{filename}" style="text-decoration:none; padding: 12px 20px; background-color: #4CAF50; color: white; border-radius: 8px; font-weight: 600; white-space: nowrap; display: inline-block; width: 100%; text-align: center; border: 1px solid #4CAF50;">📥 Download Medical Report</a>'
 
 # -----------------------------------------------------------------------------
 # Pages
@@ -192,106 +251,143 @@ def page_home():
     with c4:
         st.metric("Clinical Records", "68k+")
 
+
+
 def page_predict():
-    st.markdown("## 🔍 Patient Assessment")
-    st.markdown("Enter patient clinical data below to generate a risk profile.")
+    # Session State Initialization
+    if 'predict_view' not in st.session_state:
+        st.session_state['predict_view'] = 'form'
     
-    model, scaler, feature_columns = load_assets()
-    if not model:
-        st.error("System Error: Model artifacts not found.")
-        return
+    if st.session_state['predict_view'] == 'results':
+        # --- RESULTS VIEW ---
+        st.markdown("## 📋 Clinical Assessment Results")
+        
+        # Retrieve data
+        data = st.session_state.get('result_data', {})
+        prob = data.get('prob', 0)
+        status = data.get('status', 'Unknown')
+        color = data.get('color', '#808080')
+        rec = data.get('rec', '')
+        input_dict = data.get('input_dict', {})
+        
+        qc1, qc2 = st.columns([1, 2])
+            
+        with qc1:
+            fig = go.Figure(go.Indicator(
+                mode = "gauge+number",
+                value = prob,
+                title = {'text': "Cardiovascular Risk"},
+                gauge = {
+                    'axis': {'range': [None, 100]},
+                    'bar': {'color': "#e74c3c" if prob > 50 else "#2ecc71"},
+                    'steps': [
+                        {'range': [0, 40], 'color': "rgba(46, 204, 113, 0.3)"},
+                        {'range': [40, 70], 'color': "rgba(241, 196, 15, 0.3)"},
+                        {'range': [70, 100], 'color': "rgba(231, 76, 60, 0.3)"}]
+                }
+            ))
+            fig.update_layout(height=300, margin=dict(l=20,r=20,t=50,b=20))
+            st.plotly_chart(fig, use_container_width=True)
+        
+        with qc2:
+            st.markdown(f'<div style="background-color:{color}20; border-left: 5px solid {color}; padding: 20px; border-radius: 5px;">'
+                        f'<h2 style="color:{color}; margin:0;">{status}</h2>'
+                        f'<p style="font-size: 1.1rem; margin-top: 10px;">{rec}</p></div>', unsafe_allow_html=True)
+            
+            st.markdown("<br>", unsafe_allow_html=True)
+            
+            # Report Generation
+            report_txt = generate_report(input_dict, prob, status)
+            
+            d1, d2, d3 = st.columns([3, 3, 6], gap="small")
+            with d1:
+                st.markdown(download_link(report_txt, "Medical_Report_HeartSense.txt"), unsafe_allow_html=True)
+            with d2:
+                if st.button("⬅️ Go Back", use_container_width=True):
+                    st.session_state['predict_view'] = 'form'
+                    st.rerun()
 
-    with st.container():
-        c1, c2 = st.columns(2)
-        with c1:
-            st.markdown("### 👤 Demographics")
-            age = st.number_input("Age (Years)", min_value=10, max_value=120, value=50, step=1)
-            gender = st.radio("Gender", ["Female", "Male"], horizontal=True)
-            height = st.number_input("Height (cm)", 100, 250, 170)
-            weight = st.number_input("Weight (kg)", 40, 200, 75)
-            
-        with c2:
-            st.markdown("### 🏥 Vitals & Habits")
-            c_a, c_b = st.columns(2)
-            with c_a:
-                ap_hi = st.number_input("Systolic BP", 80, 220, 120)
-            with c_b:
-                ap_lo = st.number_input("Diastolic BP", 50, 150, 80)
-            
-            # Changed to Selectbox as requested
-            cholesterol = st.selectbox("Cholesterol Level", options=["Normal", "Above Normal", "High"])
-            glucose = st.selectbox("Glucose Level", options=["Normal", "Above Normal", "High"])
-            
-            sc1, sc2, sc3 = st.columns(3)
-            # Changed to Yes/No Selectbox as requested
-            with sc1: smoke = st.selectbox("Smoker", ["No", "Yes"])
-            with sc2: alco = st.selectbox("Alcohol", ["No", "Yes"])
-            with sc3: active = st.selectbox("Active Lifestyle", ["No", "Yes"], index=1)
+    else:
+        # --- FORM VIEW ---
+        st.markdown("## 🔍 Patient Assessment")
+        st.markdown("Enter patient clinical data below to generate a risk profile.")
+        
+        model, scaler, feature_columns = load_assets()
+        if not model:
+            st.error("System Error: Model artifacts not found.")
+            return
 
-    if st.button("Run Full Analysis", use_container_width=True):
-        with st.spinner("Processing clinical data..."):
-            time.sleep(0.5) # UX feel
-            
-            # Map Inputs
-            chol_map = {"Normal": 1, "Above Normal": 2, "High": 3}
-            
-            input_dict = {
-                'age_years': age,
-                'height': height,
-                'weight': weight,
-                'gender': gender,
-                'smoke': 1 if smoke == "Yes" else 0,
-                'alco': 1 if alco == "Yes" else 0,
-                'ap_hi': ap_hi,
-                'ap_lo': ap_lo,
-                'cholesterol': chol_map[cholesterol],
-                'gluc': chol_map[glucose],
-                'active': 1 if active == "Yes" else 0,
-                'cholesterol_label': cholesterol, # for report
-                'gluc_label': glucose # for report
-            }
-            
-            # Preprocessing matching training
-            df = pd.DataFrame([input_dict])
-            # One-hot
-            df['gender_Male'] = 1 if gender == "Male" else 0
-            df['gender_Female'] = 1 if gender == "Female" else 0
-            
-            # Scale
-            num_map = ["height", "weight", "ap_hi", "ap_lo", "age_years"]
-            df[num_map] = scaler.transform(df[num_map])
-            
-            # Ensure columns order
-            cols = ['height', 'weight', 'ap_hi', 'ap_lo', 'cholesterol', 'gluc', 'smoke', 'alco', 'active', 'age_years', 'gender_Female', 'gender_Male']
-            X = df[cols]
-            
-            # Predict
-            prob = model.predict_proba(X)[0][1] * 100
-            
-            # Display Result
-            st.markdown("---")
-            st.markdown("### 📋 Clinical Assessment Results")
-            
-            qc1, qc2 = st.columns([1, 2])
-            
-            with qc1:
-                fig = go.Figure(go.Indicator(
-                    mode = "gauge+number",
-                    value = prob,
-                    title = {'text': "Cardiovascular Risk"},
-                    gauge = {
-                        'axis': {'range': [None, 100]},
-                        'bar': {'color': "#e74c3c" if prob > 50 else "#2ecc71"},
-                        'steps': [
-                            {'range': [0, 40], 'color': "rgba(46, 204, 113, 0.3)"},
-                            {'range': [40, 70], 'color': "rgba(241, 196, 15, 0.3)"},
-                            {'range': [70, 100], 'color': "rgba(231, 76, 60, 0.3)"}]
-                    }
-                ))
-                fig.update_layout(height=300, margin=dict(l=20,r=20,t=50,b=20))
-                st.plotly_chart(fig, use_container_width=True)
-            
-            with qc2:
+        with st.container():
+            st.markdown('<div class="stCard">', unsafe_allow_html=True)
+            c1, c2 = st.columns(2)
+            with c1:
+                st.markdown('<div class="section-header">👤 Demographics</div>', unsafe_allow_html=True)
+                age = st.number_input("Age (Years)", min_value=10, max_value=120, value=50, step=1)
+                gender = st.radio("Gender", ["Female", "Male"], horizontal=True)
+                height = st.number_input("Height (cm)", 100, 250, 170)
+                weight = st.number_input("Weight (kg)", 40, 200, 75)
+                
+            with c2:
+                st.markdown('<div class="section-header">🏥 Vitals & Habits</div>', unsafe_allow_html=True)
+                c_a, c_b = st.columns(2)
+                with c_a:
+                    ap_hi = st.number_input("Systolic BP", 80, 220, 120)
+                with c_b:
+                    ap_lo = st.number_input("Diastolic BP", 50, 150, 80)
+                
+                # Changed to Selectbox as requested
+                cholesterol = st.selectbox("Cholesterol Level", options=["Normal", "Above Normal", "High"])
+                glucose = st.selectbox("Glucose Level", options=["Normal", "Above Normal", "High"])
+                
+                # Styled habit selectors
+                st.write("") # Spacer
+                sc1, sc2, sc3 = st.columns(3)
+                with sc1: smoke = st.selectbox("🚬 Smoker", ["No", "Yes"])
+                with sc2: alco = st.selectbox("🍷 Alcohol", ["No", "Yes"])
+                with sc3: active = st.selectbox("🏃 Active", ["No", "Yes"], index=1)
+            st.markdown('</div>', unsafe_allow_html=True)
+
+        if st.button("🚀 Run Advanced Analysis", use_container_width=True):
+            with st.spinner("🔄 Processing clinical data through AI core..."):
+                time.sleep(0.8) # UX feel
+                
+                # Map Inputs
+                chol_map = {"Normal": 1, "Above Normal": 2, "High": 3}
+                
+                input_dict = {
+                    'age_years': age,
+                    'height': height,
+                    'weight': weight,
+                    'gender': gender,
+                    'smoke': 1 if smoke == "Yes" else 0,
+                    'alco': 1 if alco == "Yes" else 0,
+                    'ap_hi': ap_hi,
+                    'ap_lo': ap_lo,
+                    'cholesterol': chol_map[cholesterol],
+                    'gluc': chol_map[glucose],
+                    'active': 1 if active == "Yes" else 0,
+                    'cholesterol_label': cholesterol, # for report
+                    'gluc_label': glucose # for report
+                }
+                
+                # Preprocessing matching training
+                df = pd.DataFrame([input_dict])
+                # One-hot
+                df['gender_Male'] = 1 if gender == "Male" else 0
+                df['gender_Female'] = 1 if gender == "Female" else 0
+                
+                # Scale
+                num_map = ["height", "weight", "ap_hi", "ap_lo", "age_years"]
+                df[num_map] = scaler.transform(df[num_map])
+                
+                # Ensure columns order
+                cols = ['height', 'weight', 'ap_hi', 'ap_lo', 'cholesterol', 'gluc', 'smoke', 'alco', 'active', 'age_years', 'gender_Female', 'gender_Male']
+                X = df[cols]
+                
+                # Predict
+                prob = model.predict_proba(X)[0][1] * 100
+                
+                # Logic for status
                 if prob < 40:
                     status = "Low Risk Profile"
                     color = "#27ae60"
@@ -304,16 +400,17 @@ def page_predict():
                     status = "High Risk Profile"
                     color = "#c0392b"
                     rec = "CRITICAL: High risk calculation. Immediate clinical evaluation is recommended. Diagnostic testing for arterial health advised."
-                
-                st.markdown(f'<div style="background-color:{color}20; border-left: 5px solid {color}; padding: 20px; border-radius: 5px;">'
-                            f'<h2 style="color:{color}; margin:0;">{status}</h2>'
-                            f'<p style="font-size: 1.1rem; margin-top: 10px;">{rec}</p></div>', unsafe_allow_html=True)
-                
-                st.markdown("<br>", unsafe_allow_html=True)
-                
-                # Report Generation
-                report_txt = generate_report(input_dict, prob, status)
-                st.markdown(download_link(report_txt, "Medical_Report_HeartSense.txt"), unsafe_allow_html=True)
+
+                # Store in session state
+                st.session_state['result_data'] = {
+                    'prob': prob,
+                    'status': status,
+                    'color': color,
+                    'rec': rec,
+                    'input_dict': input_dict
+                }
+                st.session_state['predict_view'] = 'results'
+                st.rerun()
 
 def page_dashboard():
     st.markdown("## 📊 Population Health Dashboard")
@@ -394,21 +491,34 @@ def page_prevention():
 
 def page_parameters():
     st.markdown("## ℹ️ Clinical Parameters Explained")
+    st.markdown("Understanding your health metrics is the first step to prevention.")
+    st.markdown("---")
     
-    params = {
-        "Systolic BP (ap_hi)": "The pressure in your arteries when your heart beats. High values (>130) indicate hypertension.",
-        "Diastolic BP (ap_lo)": "The pressure in your arteries when your heart rests between beats.",
-        "Cholesterol": "A waxy substance found in blood. High levels can build up in arteries (atherosclerosis).",
-        "Glucose": "Blood sugar level. Elevated levels are a primary marker for diabetes, a major heart risk.",
-        "BMI (Body Mass Index)": "A measure of body fat based on height and weight. BMI > 25 is Overweight, > 30 is Obese.",
-        "Smoking": "Damages the lining of your arteries containing fatty material (atheroma) which narrows the artery.",
-        "Alcohol": "Excessive consumption can raise blood pressure and weight, increasing risk."
-    }
+    params = [
+        {"icon": "💓", "name": "Systolic BP (ap_hi)", "desc": "The pressure in your arteries when your heart beats. High values (>130) indicate hypertension.", "color": "#FF6B6B"},
+        {"icon": "🔽", "name": "Diastolic BP (ap_lo)", "desc": "The pressure in your arteries when your heart rests between beats.", "color": "#4ECDC4"},
+        {"icon": "🍔", "name": "Cholesterol", "desc": "A waxy substance found in blood. High levels can build up in arteries (atherosclerosis).", "color": "#FFA502"},
+        {"icon": "🍬", "name": "Glucose", "desc": "Blood sugar level. Elevated levels are a primary marker for diabetes, a major heart risk.", "color": "#A3CB38"},
+        {"icon": "⚖️", "name": "BMI (Body Mass Index)", "desc": "A measure of body fat based on height and weight. BMI > 25 is Overweight, > 30 is Obese.", "color": "#12CBC4"},
+        {"icon": "🚬", "name": "Smoking", "desc": "Damages the lining of your arteries containing fatty material (atheroma) which narrows the artery.", "color": "#57606f"},
+        {"icon": "🍷", "name": "Alcohol", "desc": "Excessive consumption can raise blood pressure and weight, increasing risk.", "color": "#8e44ad"}
+    ]
     
-    for param, desc in params.items():
-        st.markdown(f"**{param}**")
-        st.markdown(f"_{desc}_")
-        st.markdown("---")
+    cols = st.columns(3)
+    
+    for i, p in enumerate(params):
+        with cols[i % 3]:
+            st.markdown(f"""
+            <div class="param-card" style="background: linear-gradient(135deg, {p['color']}15, {p['color']}05); border: 1px solid {p['color']}30; border-left: 5px solid {p['color']};">
+                <div class="param-header" style="color: {p['color']}; filter: brightness(0.8);">
+                    <span style="font-size: 1.5rem; margin-right: 10px;">{p['icon']}</span>
+                    {p['name']}
+                </div>
+                <div class="param-desc" style="color: #4a4a4a;">
+                    {p['desc']}
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
 
 def page_model_analysis():
     st.markdown("## 🤖 Model Performance Analytics")
