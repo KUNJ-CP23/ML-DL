@@ -222,24 +222,42 @@ def local_css():
 # -----------------------------------------------------------------------------
 @st.cache_resource
 def load_assets():
-    """Load model artifacts."""
+    """Load model artifacts with detailed error reporting."""
     try:
-        base_path = Path("models")
-        with open(base_path / "rf_model.pkl", "rb") as f: model = pickle.load(f)
-        with open(base_path / "scaler.pkl", "rb") as f: scaler = pickle.load(f)
-        with open(base_path / "feature_columns.pkl", "rb") as f: feats = pickle.load(f)
+        # Use Path relative to this script file for cloud compatibility
+        base_path = Path(__file__).parent / "models"
+        
+        model_file = base_path / "rf_model.pkl"
+        scaler_file = base_path / "scaler.pkl"
+        feats_file = base_path / "feature_columns.pkl"
+        
+        # Check each file exists
+        for f in [model_file, scaler_file, feats_file]:
+            if not f.exists():
+                st.error(f"❌ File not found: {f}")
+                return None, None, None
+        
+        with open(model_file, "rb") as f: model = pickle.load(f)
+        with open(scaler_file, "rb") as f: scaler = pickle.load(f)
+        with open(feats_file, "rb") as f: feats = pickle.load(f)
         return model, scaler, feats
     except Exception as e:
+        st.error(f"❌ Error loading model assets: {e}")
+        st.error(f"Python version: {sys.version}")
         return None, None, None
 
 @st.cache_data
 def load_dataset():
     """Load and cache the training dataset for charts."""
     try:
-        # Load a sample for performance
-        df = pd.read_csv("data/cardio_train.csv", sep=";")
+        data_path = Path(__file__).parent / "data" / "cardio_train.csv"
+        if not data_path.exists():
+            st.error(f"❌ Dataset not found: {data_path}")
+            return None
+        df = pd.read_csv(data_path, sep=";")
         return df
-    except:
+    except Exception as e:
+        st.error(f"❌ Error loading dataset: {e}")
         return None
 
 def generate_report(data, risk_score, risk_label):
