@@ -311,7 +311,12 @@ def page_home():
     # --- HERO SECTION ---
     st.markdown('<div style="text-align: center; padding-top: 2rem; padding-bottom: 3rem;">', unsafe_allow_html=True)
     st.markdown('<h1 class="main-title">Heart Sense</h1>', unsafe_allow_html=True)
-    
+    st.markdown(
+    '<p style="text-align:center; color: #9aa0a6; font-size: 18px; margin-top: -10px;">'
+    'AI-powered cardiovascular risk prediction using clinical and lifestyle factors.'
+    '</p>',
+    unsafe_allow_html=True
+)
     st.markdown('</div>', unsafe_allow_html=True)
     
     # --- FEATURE GRID ---
