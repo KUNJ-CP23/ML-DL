@@ -311,12 +311,7 @@ def page_home():
     # --- HERO SECTION ---
     st.markdown('<div style="text-align: center; padding-top: 2rem; padding-bottom: 3rem;">', unsafe_allow_html=True)
     st.markdown('<h1 class="main-title">Heart Sense</h1>', unsafe_allow_html=True)
-    st.markdown('''
-        <p class="hero-subtitle">
-            Next-Generation Cardiovascular Intelligence.<br>
-            <span style="font-size: 1.1rem; opacity: 0.8;">Empowering Early Detection with Machine Learning</span>
-        </p>
-    ''', unsafe_allow_html=True)
+    
     st.markdown('</div>', unsafe_allow_html=True)
     
     # --- FEATURE GRID ---
