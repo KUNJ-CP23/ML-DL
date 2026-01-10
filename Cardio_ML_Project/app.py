@@ -686,7 +686,7 @@ def page_model_analysis():
             <tr>
                 <th style="width: 25%;">Algorithm Model</th>
                 <th style="width: 25%;">Train-Test Accuracy</th>
-                <th style="width: 25%;">Tuned Accuracy (CV)</th>
+                <th style="width: 25%;">HyperParameter Tuning</th>
                 <th style="width: 25%;">K-Fold Accuracy</th>
             </tr>
         </thead>
