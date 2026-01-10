@@ -768,11 +768,18 @@ def page_model_analysis():
     @st.cache_data
     def get_corr_matrix():
         try:
-            df = pd.read_csv('data/cardio_preprocessed.csv')
+            # Robust path handling
+            data_path = Path(__file__).parent / 'data' / 'cardio_preprocessed.csv'
+            if not data_path.exists():
+                st.error(f"❌ Data file not found at: {data_path}")
+                return None
+                
+            df = pd.read_csv(data_path)
             # Filter for numeric columns only just in case, though file is preprocessed
             numeric_df = df.select_dtypes(include=[np.number])
             return numeric_df.corr()
-        except:
+        except Exception as e:
+             st.error(f"❌ Error loading correlation data: {e}")
              return None
 
     corr_df = get_corr_matrix()
