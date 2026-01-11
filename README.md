@@ -25,10 +25,15 @@ The application provides a **risk percentage**, prediction output, and includes 
 ## 🚀 Features
 
 ✅ Disease Risk Prediction using trained ML model  
+
 ✅ Risk Level shown in **percentage**  
+
 ✅ Clean and interactive **multi-page Streamlit UI**  
+
 ✅ Health dashboard + risk analytics
+
 ✅ Model accuracy : 73.5%
+
 ✅ Model evaluation table:
 - Train-Test Split accuracy
 - K-Fold Cross Validation accuracy
